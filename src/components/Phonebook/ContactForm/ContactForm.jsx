@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import { addContact } from '../../../redux/contacts/contactsOperations';
 import { useSelector, useDispatch } from 'react-redux';
 import css from '../RegisterForm/RegisterForm.module.css';
-import confetti from 'https://cdn.skypack.dev/canvas-confetti@1';
+import confetti from 'canvas-confetti';
 
 export const ContactForm = () => {
   const [name, setName] = useState('');
