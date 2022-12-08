@@ -9,6 +9,7 @@ export const UserMenu = () => {
   const { contacts, isLoggedIn } = useSelector(getAuth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  console.log(contacts);
 
   const onLogoutClick = () => {
     dispatch(logoutUser());
