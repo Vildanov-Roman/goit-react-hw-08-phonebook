@@ -7,7 +7,7 @@ import css from './Phonebook.module.css';
 const Text = ({ value }) => (
   <div className={css.text}>
     {value.split('').map((char, i) => (
-      <div className={css.letter} style={{ '--delay': `${i * 0.2}s` }}>
+      <div className={css.letter} style={{ '--delay': `${i * 0.2}s` }} key={i}>
         <span className={css.source}>{char}</span>
         <span className={css.shadow}>{char}</span>
         <span className={css.overlay}>{char}</span>
