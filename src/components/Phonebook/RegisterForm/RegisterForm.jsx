@@ -1,90 +1,43 @@
-import { useState, useMemo } from 'react';
+// import { useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { nanoid } from 'nanoid';
+// import { nanoid } from 'nanoid';
 import { getAuth } from 'redux/auth/authSlice';
 import { registerUser } from 'redux/auth/authOperations';
 import css from './RegisterForm.module.css';
 import { Loader } from '../Loader/Loader';
 
 const RegisterForm = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
-  const handleChange = e => {
-    const { name, value } = e.target;
-
-    switch (name) {
-      case 'userName':
-        setName(value);
-        break;
-      case 'userEmail':
-        setEmail(value);
-        break;
-      case 'userPassword':
-        setPassword(value);
-        break;
-      default:
-        setName('');
-        setEmail('');
-        setPassword('');
-    }
-  };
-
   const dispatch = useDispatch();
+
   const { isLoading } = useSelector(getAuth);
 
   const handleSubmit = e => {
     e.preventDefault();
-
-    dispatch(registerUser({ name: name, email: email, password: password }));
+    const form = e.currentTarget;
+    dispatch(
+      registerUser({
+        name: form.elements.name.value,
+        email: form.elements.email.value,
+        password: form.elements.password.value,
+      })
+    );
+    form.reset();
   };
 
-  const nameId = useMemo(() => nanoid(), []);
-  const emailId = useMemo(() => nanoid(), []);
-  const passwordId = useMemo(() => nanoid(), []);
-
   return (
-    <form onSubmit={handleSubmit} className={css.form}>
-      <label className={css.label} htmlFor={nameId}>
-        Name
+    <form className={css.form} onSubmit={handleSubmit} autoComplete="off">
+      <label className={css.label}>
+        Username
+        <input type="text" name="name" />
       </label>
-      <input
-        id={nameId}
-        type="text"
-        name="userName"
-        value={name}
-        onChange={handleChange}
-        required
-        placeholder="Taras Shevchenko"
-        className={css.input}
-      />
-      <label className={css.label} htmlFor={emailId}>
+      <label className={css.label}>
         Email
+        <input type="email" name="email" />
       </label>
-      <input
-        id={emailId}
-        type="email"
-        name="userEmail"
-        value={email}
-        onChange={handleChange}
-        required
-        placeholder="mail@mail.com"
-        className={css.input}
-      />
-      <label className={css.label} htmlFor={passwordId}>
+      <label className={css.label}>
         Password
+        <input type="password" name="password" />
       </label>
-      <input
-        id={passwordId}
-        type="password"
-        name="userPassword"
-        value={password}
-        onChange={handleChange}
-        required
-        placeholder="Create save password"
-        className={css.input}
-      />
       {!isLoading ? (
         <button type="submit" className={css.btn}>
           Sign Up
