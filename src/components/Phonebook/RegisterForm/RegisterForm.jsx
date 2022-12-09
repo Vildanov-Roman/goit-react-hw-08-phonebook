@@ -27,16 +27,31 @@ const RegisterForm = () => {
   return (
     <form className={css.form} onSubmit={handleSubmit} autoComplete="off">
       <label className={css.label}>
-        Username
-        <input type="text" name="name" />
+        Name
+        <input
+          type="text"
+          name="name"
+          className={css.input}
+          placeholder="Taras Shevchenko"
+        />
       </label>
       <label className={css.label}>
         Email
-        <input type="email" name="email" />
+        <input
+          type="email"
+          name="email"
+          className={css.input}
+          placeholder="mail@mail.com"
+        />
       </label>
       <label className={css.label}>
         Password
-        <input type="password" name="password" />
+        <input
+          type="password"
+          name="password"
+          className={css.input}
+          placeholder="reliable password"
+        />
       </label>
       {!isLoading ? (
         <button type="submit" className={css.btn}>
